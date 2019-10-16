@@ -1,13 +1,19 @@
 library(grid)
 
-# Bezier to polygon -------------------------------------------------------
-
-grid.moon <- function(
+moonGrob <- function(
   x, y, ratio = 0.25, right = TRUE, size = 1, angle = 0,
   default.units = "npc", ...
 ) {
   
-  # FIXME: Add checks for valid input values
+  stopifnot(is.numeric(x))
+  stopifnot(is.numeric(y))
+  stopifnot(is.numeric(ratio))
+  stopifnot(ratio >= 0, ratio <= 1)
+  stopifnot(is.logical(right))
+  stopifnot(is.numeric(size))
+  stopifnot(is.numeric(angle))
+  stopifnot(is.character(default.units))
+  stopifnot(default.units %in% grid:::.grid.unit.list)
   
   magic <- 0.571 # Magic number for Bezier approximation of ellipse
   
@@ -42,6 +48,7 @@ grid.moon <- function(
     default.units = default.units
   ))
   
+  # Get x and y coordinates for whole perimeter
   poly_x <- unit.c(
     bez_circ_top$x,
     bez_circ_bot$x[2:length(bez_circ_bot$x)],
@@ -57,14 +64,23 @@ grid.moon <- function(
   
   # For a left-side moon, flip the x values around the origin
   if(right == FALSE) {
-    poly_x <- unit(x, default.units) - (poly_x - unit(x, default.units))
+    x_unit <- unit(x, default.units)
+    poly_x <- x_unit - (poly_x - x_unit)
   }
   
-  # FIXME: Implement rotation
+  # TODO: Implement rotation
   
-  grid.polygon(poly_x, poly_y, default.units = default.units, ...)
+  polygonGrob(poly_x, poly_y, default.units = default.units, ...)
 }
 
+
+grid.moon <- function(..., draw = TRUE) {
+  mg <- moonGrob(...)
+  if (draw) {
+    grid.draw(mg)
+  }
+  invisible(mg)
+}
 
 
 # Examples ----------------------------------------------------------------
