@@ -2,7 +2,7 @@ library(grid)
 
 moonGrob <- function(
   x, y, ratio = 0.25, right = TRUE, size = 1, angle = 0,
-  default.units = "npc", ...
+  default.units = "npc", size.units = "mm", ...
 ) {
   
   stopifnot(is.numeric(x))
@@ -18,16 +18,19 @@ moonGrob <- function(
   magic <- 0.571 # Magic number for Bezier approximation of ellipse
   
   # Calculate points of Bezier approximations of circle and ellipse
-  # that define the shape
+  # that define the shape.
+  # First center the circle and ellipse at the origin (using size.units),
+  # then we will translate everything to the right location (using
+  # default.units).
   bez_circ_top <- bezierPoints(bezierGrob(
-    c(x, x + magic * size, x + size, x + size),
-    c(y + size, y + size, y + magic * size, y),
-    default.units = default.units
+    c(0, magic * size, size, size),
+    c(size, size, magic * size, 0),
+    default.units = size.units
   ))
   bez_circ_bot <- bezierPoints(bezierGrob(
-    c(x + size, x + size, x + magic * size, x),
-    c(y, y - magic * size, y - size, y - size),
-    default.units = default.units
+    c(size, size, magic * size, 0),
+    c(0, -magic * size, -size, -size),
+    default.units = size.units
   ))
   
   # Calculate scaling factor for ellipse
@@ -36,16 +39,16 @@ moonGrob <- function(
   x_dir <- ifelse(ratio > 0.5, 1, -1)
   
   bez_elli_bot <- bezierPoints(bezierGrob(
-    c(x, x + x_dir * magic * size * e_scale,
-      x + x_dir * size * e_scale, x + x_dir * size * e_scale),
-    c(y - size, y - size, y - magic * size, y),
-    default.units = default.units
+    c(0, x_dir * magic * size * e_scale,
+      x_dir * size * e_scale, x_dir * size * e_scale),
+    c(-size, -size, -magic * size, 0),
+    default.units = size.units
   ))
   bez_elli_top <- bezierPoints(bezierGrob(
-    c(x + x_dir * size * e_scale, x + x_dir * size * e_scale,
-      x + x_dir * magic * size * e_scale, x),
-    c(y, y + magic * size, y + size, y + size),
-    default.units = default.units
+    c(x_dir * size * e_scale, x_dir * size * e_scale,
+      x_dir * magic * size * e_scale, 0),
+    c(0, magic * size, size, size),
+    default.units = size.units
   ))
   
   # Get x and y coordinates for whole perimeter
@@ -64,13 +67,22 @@ moonGrob <- function(
   
   # For a left-side moon, flip the x values around the origin
   if(right == FALSE) {
-    x_unit <- unit(x, default.units)
-    poly_x <- x_unit - (poly_x - x_unit)
+    poly_x <- unit(0, size.units) - poly_x
   }
+  
+  # Translate the shape to the specified center point
+  if (!is.unit(x)) {
+    x <- unit(x, default.units)
+  }
+  if (!is.unit(y)) {
+    y <- unit(y, default.units)
+  }
+  trans_x <- poly_x + x
+  trans_y <- poly_y + y
   
   # TODO: Implement rotation
   
-  polygonGrob(poly_x, poly_y, default.units = default.units, ...)
+  polygonGrob(trans_x, trans_y, default.units = default.units, ...)
 }
 
 
@@ -85,42 +97,46 @@ grid.moon <- function(..., draw = TRUE) {
 
 # Examples ----------------------------------------------------------------
 
-grid.newpage()
-grid.moon(
-  20, 20, ratio = 0.25, size = 10, default.units = "mm",
-  gp = gpar(fill = "firebrick2", col = "firebrick2")
-)
-grid.moon(
-  20, 20, ratio = 0.75, size = 10, default.units = "mm", right = FALSE,
-  gp = gpar(fill = "dodgerblue2", col = "dodgerblue2")
-)
-grid.moon(
-  50, 50, ratio = 0.5, size = 10, default.units = "mm",
-  gp = gpar(fill = "forestgreen")
-)
-grid.moon(
-  50, 50, ratio = 0.5, size = 10, default.units = "mm", right = FALSE,
-  gp = gpar(fill = "gold1")
-)
-grid.moon(
-  80, 80, ratio = 0.9, size = 15, default.units = "mm"
-)
-grid.moon(
-  80, 80, ratio = 0.1, size = 15, default.units = "mm", right = FALSE
-)
-grid.moon(
-  110, 50, ratio = 0.6, size = 15, default.units = "mm",
-  gp = gpar(fill = "chartreuse3", lwd = 0)
-)
-grid.moon(
-  110, 50, ratio = 0.4, size = 15, default.units = "mm", right = FALSE,
-  gp = gpar(fill = "blueviolet", lwd = 0)
-)
-grid.circle(
-  80, 20, 10, default.units = "mm",
-  gp = gpar(fill = "yellow", alpha = 0.5, lwd = 0)
-)
-grid.moon(
-  80, 20, ratio = 1, size = 10, default.units = "mm",
-  gp = gpar(fill = "cyan", alpha = 0.5, lwd = 0)
-)
+# grid.newpage()
+# grid.moon(
+#   20, 20, ratio = 0.25, size = 10, default.units = "mm",
+#   gp = gpar(fill = "firebrick2", col = "firebrick2")
+# )
+# grid.moon(
+#   20, 20, ratio = 0.75, size = 10, default.units = "mm", right = FALSE,
+#   gp = gpar(fill = "dodgerblue2", col = "dodgerblue2")
+# )
+# grid.moon(
+#   50, 50, ratio = 0.5, size = 10, default.units = "mm",
+#   gp = gpar(fill = "forestgreen")
+# )
+# grid.moon(
+#   50, 50, ratio = 0.5, size = 10, default.units = "mm", right = FALSE,
+#   gp = gpar(fill = "gold1")
+# )
+# grid.moon(
+#   80, 80, ratio = 0.9, size = 15, default.units = "mm"
+# )
+# grid.moon(
+#   80, 80, ratio = 0.1, size = 15, default.units = "mm", right = FALSE
+# )
+# grid.moon(
+#   110, 50, ratio = 0.6, size = 15, default.units = "mm",
+#   gp = gpar(fill = "chartreuse3", lwd = 0)
+# )
+# grid.moon(
+#   110, 50, ratio = 0.4, size = 15, default.units = "mm", right = FALSE,
+#   gp = gpar(fill = "blueviolet", lwd = 0)
+# )
+# grid.circle(
+#   80, 20, 10, default.units = "mm",
+#   gp = gpar(fill = "yellow", alpha = 0.5, lwd = 0)
+# )
+# grid.moon(
+#   80, 20, ratio = 1, size = 10, default.units = "mm",
+#   gp = gpar(fill = "cyan", alpha = 0.5, lwd = 0)
+# )
+# grid.moon(
+#   0.8, 0.5, ratio = 0.25, size = 10, default.units = "npc"
+# )
+
