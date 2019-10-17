@@ -8,13 +8,66 @@ moonGrob <- function(
   stopifnot(is.numeric(x))
   stopifnot(is.numeric(y))
   stopifnot(is.numeric(ratio))
-  stopifnot(ratio >= 0, ratio <= 1)
+  stopifnot(all(ratio >= 0), all(ratio <= 1))
   stopifnot(is.logical(right))
   stopifnot(is.numeric(size))
   stopifnot(is.numeric(angle))
   stopifnot(is.character(default.units))
+  stopifnot(is.character(default.units))
+  stopifnot(is.character(size.units))
   stopifnot(default.units %in% grid:::.grid.unit.list)
+  stopifnot(size.units %in% grid:::.grid.unit.list)
+  stopifnot(length(x) == length(y))
+  stopifnot(length(ratio) %in% c(1, length(x)))
+  stopifnot(length(right) %in% c(1, length(x)))
+  stopifnot(length(size) %in% c(1, length(x)))
+  stopifnot(length(angle) %in% c(1, length(x)))
   
+  if (length(ratio) == 1) {
+    ratio <- rep(ratio, length(x))
+  }
+  if (length(right) == 1) {
+    right <- rep(right, length(x))
+  }
+  if (length(size) == 1) {
+    size <- rep(size, length(x))
+  }
+  if (length(angle) == 1) {
+    angle <- rep(angle, length(x))
+  }
+  
+  coords_list <- mapply(
+    moon_coords,
+    x = x, y = y, ratio = ratio, right = right, size = size, angle = angle,
+    MoreArgs = list(
+      default.units = default.units, size.units = size.units
+    )
+  )
+  
+  x_coords <- do.call(unit.c, coords_list["x_coords",])
+  y_coords <- do.call(unit.c, coords_list["y_coords",])
+  
+  polygonGrob(
+    x_coords, y_coords,
+    id.lengths = sapply(coords_list["x_coords",], length),
+    default.units = default.units, ...
+  )
+  
+}
+
+
+grid.moon <- function(..., draw = TRUE) {
+  mg <- moonGrob(...)
+  if (draw) {
+    grid.draw(mg)
+  }
+  invisible(mg)
+}
+
+
+moon_coords <- function(
+  x, y, ratio, right, size, angle, default.units, size.units
+) {
   magic <- 0.571 # Magic number for Bezier approximation of ellipse
   
   # Calculate points of Bezier approximations of circle and ellipse
@@ -82,16 +135,7 @@ moonGrob <- function(
   
   # TODO: Implement rotation
   
-  polygonGrob(trans_x, trans_y, default.units = default.units, ...)
-}
-
-
-grid.moon <- function(..., draw = TRUE) {
-  mg <- moonGrob(...)
-  if (draw) {
-    grid.draw(mg)
-  }
-  invisible(mg)
+  list(x_coords = trans_x, y_coords = trans_y)
 }
 
 
@@ -140,3 +184,8 @@ grid.moon <- function(..., draw = TRUE) {
 #   0.8, 0.5, ratio = 0.25, size = 10, default.units = "npc"
 # )
 
+# grid.newpage()
+# grid.moon(
+#   x = rep(1:10/11, 10), y = rep(10:1/11, each = 10), ratio = 1:100/100,
+#   size = 3, gp = gpar(col = "red", fill = "red")
+# )
