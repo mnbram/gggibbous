@@ -134,6 +134,7 @@ moon_coords <- function(
   trans_y <- poly_y + y
   
   # TODO: Implement rotation
+  # FIXME: If ratio is 0 or 1, return a dummy point
   
   list(x_coords = trans_x, y_coords = trans_y)
 }
@@ -187,5 +188,8 @@ moon_coords <- function(
 # grid.newpage()
 # grid.moon(
 #   x = rep(1:10/11, 10), y = rep(10:1/11, each = 10), ratio = 1:100/100,
-#   size = 3, gp = gpar(col = "red", fill = "red")
+#   size = 3, gp = gpar(
+#     col = hcl(0:99*3.6, c = 60, l = 70),
+#     fill = hcl(0:99*3.6, c = 60, l = 70)
+#   )
 # )
