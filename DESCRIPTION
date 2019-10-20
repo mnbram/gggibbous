@@ -1,0 +1,15 @@
+Package: gggibbous
+Title: Moon charts, a pie chart alternative
+Version: 0.0.0.9000
+Authors@R: person("Michael", "Bramson", email = "mnbramson@gmail.com",
+    role = c("aut", "cre"))
+Description: Moon charts are like pie charts except that the proportions are
+    shown as crescent or gibbous portions of a circle, like the lit and unlit
+    portions of the moon. As such, they work best with only one or two groups.
+    gggibbous extends ggplot2 to allow for plotting multiple moon charts in a
+    single panel and does not require a square coordinate system.
+Depends: R (>= 3.6.0)
+Imports:
+    ggplot2 (>= 3.2.1)
+License: GPL-3
+LazyData: true
