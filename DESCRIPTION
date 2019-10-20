@@ -8,8 +8,8 @@ Description: Moon charts are like pie charts except that the proportions are
     portions of the moon. As such, they work best with only one or two groups.
     gggibbous extends ggplot2 to allow for plotting multiple moon charts in a
     single panel and does not require a square coordinate system.
-Depends: R (>= 3.6.0)
-Imports:
+Depends:
+    R (>= 3.6.0),
     ggplot2 (>= 3.2.1)
 License: GPL-3
 LazyData: true
