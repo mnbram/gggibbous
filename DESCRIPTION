@@ -11,5 +11,8 @@ Description: Moon charts are like pie charts except that the proportions are
 Depends:
     R (>= 3.6.0),
     ggplot2 (>= 3.2.1)
+Imports:
+    grid,
+    scales (>= 1.0.0)
 License: GPL-3
 LazyData: true
