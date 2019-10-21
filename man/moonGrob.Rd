@@ -5,7 +5,7 @@
 \alias{grid.moon}
 \title{Draw a moon}
 \usage{
-moonGrob(x, y, ratio = 0.25, right = TRUE, size = 1, angle = 0,
+moonGrob(x, y, ratio = 0.25, right = TRUE, r = 1, angle = 0,
   default.units = "npc", size.units = "mm", ...)
 
 grid.moon(..., draw = TRUE)
@@ -21,7 +21,7 @@ proportion of the moons to draw.}
 \item{right}{A boolean vector specifying whether the moon should be filled
 from the right (TRUE) or left (FALSE).}
 
-\item{size}{A numeric vector specifying the radii of the circles describing
+\item{r}{A numeric vector specifying the radii of the circles describing
 the moons.}
 
 \item{angle}{Not used.}
@@ -57,5 +57,5 @@ The units in \code{default.units} and \code{size.units} can be different;
 }
 \examples{
 grid::grid.newpage()
-grid.moon(x = 1:3 * 0.25, y = rep(0.5, 3), ratio = 1:3 * 0.25, size = 10)
+grid.moon(x = 1:3 * 0.25, y = rep(0.5, 3), ratio = 1:3 * 0.25, r = 10)
 }

@@ -1,25 +1,10 @@
-# TODO:
-# - Change default size scale
-# - Create proper draw key
-# - Finish documentation
-# - Make up some good examples
-
-#' Moon charts
-#' 
-#' The moon geom is used to create moon charts, which are like pie charts except
-#' that the proportions are shown as crescent or gibbous portions of a circle,
-#' like the lit and unlit portions of the moon. As such, they work best with
-#' only one or two groups.
-#' 
-#' \code{geom_moon} acts like \code{geom_points} in that mutiple moons can be
-#' plotted on the same panel ... FINISH THIS PART
 GeomMoon <- ggplot2::ggproto(
   "GeomMoon", ggplot2::Geom,
   
   required_aes = c("x", "y"),
   
   default_aes = ggplot2::aes(
-    ratio = 0.25, right = TRUE, size = 50, angle = 0,
+    ratio = 0.25, right = TRUE, size = 10, angle = 0,
     colour = "black", fill = "white", alpha = NA,
     stroke = 0.25, linetype = 1
   ),
@@ -31,7 +16,7 @@ GeomMoon <- ggplot2::ggproto(
     coords <- coord$transform(data, panel_params)
     moonGrob(
       coords$x, coords$y, ratio = coords$ratio, right = coords$right,
-      r = sqrt(coords$size / pi), # Convert area to radius
+      r = sqrt(coords$size), # Convert area to radius
       angle = coords$angle,
       gp = grid::gpar(
         col = scales::alpha(coords$colour, coords$alpha),
@@ -44,6 +29,25 @@ GeomMoon <- ggplot2::ggproto(
 )
 
 
+#' Moon charts
+#' 
+#' The moon geom is used to create moon charts, which are like pie charts except
+#' that the proportions are shown as crescent or gibbous portions of a circle,
+#' like the lit and unlit portions of the moon. As such, they work best with
+#' only one or two groups.
+#' 
+#' \code{geom_moon} acts like \code{geom_points} in that mutiple moons can be
+#' plotted on the same panel with x and y in the plot's coordinate system, but
+#' size determined independently of the coordinate system. This behavior also
+#' means that the moons will always be circular even if the coordinate system is
+#' not square.
+#' 
+#' In order to get a full circle with two complementary sections (a crescent and
+#' a gibbous moon), you need to plot two shapes: one with \code{right = TRUE}
+#' and one with \code{right = FALSE}, with \code{ratio} on the second one equal
+#' to \code{1 - ratio} on the first.
+#' 
+#' @inheritParams ggplot2::geom_point
 geom_moon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, ...
@@ -60,7 +64,7 @@ geom_moon <- function(
 # Examples ----------------------------------------------------------------
 
 # df <- data.frame(
-#   x = c(1:5, NA), y = 1:6, gibbosity = 0:5 / 5, size = 1:6
+#   x = c(1:5), y = 1:5, gibbosity = 0:4 / 4, size = 1:5
 # )
 # 
 # ggplot2::ggplot(df, ggplot2::aes(x, y, size = size)) +
@@ -68,6 +72,4 @@ geom_moon <- function(
 #   geom_moon(
 #     ggplot2::aes(ratio = 1 - gibbosity),
 #     fill = "blue", color = "blue", right = FALSE
-#   ) +
-#   ggplot2::scale_size_continuous(
-#     range = c(20, 100), guide = "none")
+#   )
