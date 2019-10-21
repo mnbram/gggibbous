@@ -16,7 +16,7 @@
 #'   proportion of the moons to draw.
 #' @param right A boolean vector specifying whether the moon should be filled
 #'   from the right (TRUE) or left (FALSE).
-#' @param size A numeric vector specifying the radii of the circles describing
+#' @param r A numeric vector specifying the radii of the circles describing
 #'   the moons.
 #' @param angle Not used.
 #' @param size.units A string indicating the units to use for the radii of the
@@ -26,10 +26,10 @@
 #' @return A grob object.
 #' @examples
 #' grid::grid.newpage()
-#' grid.moon(x = 1:3 * 0.25, y = rep(0.5, 3), ratio = 1:3 * 0.25, size = 10)
+#' grid.moon(x = 1:3 * 0.25, y = rep(0.5, 3), ratio = 1:3 * 0.25, r = 10)
 
 moonGrob <- function(
-  x, y, ratio = 0.25, right = TRUE, size = 1, angle = 0,
+  x, y, ratio = 0.25, right = TRUE, r = 1, angle = 0,
   default.units = "npc", size.units = "mm", ...
 ) {
   
@@ -38,7 +38,7 @@ moonGrob <- function(
   stopifnot(is.numeric(ratio))
   stopifnot(all(ratio >= 0), all(ratio <= 1))
   stopifnot(is.logical(right))
-  stopifnot(is.numeric(size))
+  stopifnot(is.numeric(r))
   # stopifnot(is.numeric(angle))
   stopifnot(is.character(default.units))
   stopifnot(is.character(default.units))
@@ -48,7 +48,7 @@ moonGrob <- function(
   stopifnot(length(x) == length(y))
   stopifnot(length(ratio) %in% c(1, length(x)))
   stopifnot(length(right) %in% c(1, length(x)))
-  stopifnot(length(size) %in% c(1, length(x)))
+  stopifnot(length(r) %in% c(1, length(x)))
   stopifnot(length(angle) %in% c(1, length(x)))
   
   if (length(ratio) == 1) {
@@ -57,8 +57,8 @@ moonGrob <- function(
   if (length(right) == 1) {
     right <- rep(right, length(x))
   }
-  if (length(size) == 1) {
-    size <- rep(size, length(x))
+  if (length(r) == 1) {
+    r <- rep(r, length(x))
   }
   if (length(angle) == 1) {
     angle <- rep(angle, length(x))
@@ -66,7 +66,7 @@ moonGrob <- function(
   
   coords_list <- mapply(
     moon_coords,
-    x = x, y = y, ratio = ratio, right = right, size = size, angle = angle,
+    x = x, y = y, ratio = ratio, right = right, size = r, angle = angle,
     MoreArgs = list(
       default.units = default.units, size.units = size.units
     )
@@ -223,7 +223,7 @@ moon_coords <- function(
 # grid::grid.newpage()
 # grid.moon(
 #   x = rep(1:10/11, 10), y = rep(10:1/11, each = 10), ratio = 1:100/100,
-#   size = 3, gp = grid::gpar(
+#   r = 3, gp = grid::gpar(
 #     col = hcl(0:99*3.6, c = 60, l = 70),
 #     fill = hcl(0:99*3.6, c = 60, l = 70)
 #   )
