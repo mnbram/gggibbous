@@ -1,3 +1,33 @@
+#' Draw a moon
+#' 
+#' Functions to create and draw crescent or gibbous moon shapes.
+#' 
+#' Both functions create a moon grob (a graphical object describing a crescent
+#' or gibbous moon), but only \code{grid.moon} draws the moon (and then only
+#' if draw is TRUE).
+#' 
+#' These functions calculate a set of points describing the perimeters of the
+#' moons and pass these points on to \code{grid::polygonGrob}.
+#' 
+#' The units in \code{default.units} and \code{size.units} can be different;
+#' \code{grid} will add them together appropriately before drawing.
+#' 
+#' @param ratio A numeric vector with values from 0 to 1 specifying the
+#'   proportion of the moons to draw.
+#' @param right A boolean vector specifying whether the moon should be filled
+#'   from the right (TRUE) or left (FALSE).
+#' @param size A numeric vector specifying the radii of the circles describing
+#'   the moons.
+#' @param angle Not used.
+#' @param size.units A string indicating the units to use for the radii of the
+#'   moons.
+#' @param ... Arguments passed on to \code{grid::polygonGrob}.
+#' @inheritParams grid::polygonGrob
+#' @return A grob object.
+#' @examples
+#' grid::grid.newpage()
+#' grid.moon(x = 1:3 * 0.25, y = rep(0.5, 3), ratio = 1:3 * 0.25, size = 10)
+
 moonGrob <- function(
   x, y, ratio = 0.25, right = TRUE, size = 1, angle = 0,
   default.units = "npc", size.units = "mm", ...
@@ -9,7 +39,7 @@ moonGrob <- function(
   stopifnot(all(ratio >= 0), all(ratio <= 1))
   stopifnot(is.logical(right))
   stopifnot(is.numeric(size))
-  stopifnot(is.numeric(angle))
+  # stopifnot(is.numeric(angle))
   stopifnot(is.character(default.units))
   stopifnot(is.character(default.units))
   stopifnot(is.character(size.units))
@@ -54,6 +84,7 @@ moonGrob <- function(
 }
 
 
+#' @rdname moonGrob
 grid.moon <- function(..., draw = TRUE) {
   mg <- moonGrob(...)
   if (draw) {
@@ -197,3 +228,4 @@ moon_coords <- function(
 #     fill = hcl(0:99*3.6, c = 60, l = 70)
 #   )
 # )
+
