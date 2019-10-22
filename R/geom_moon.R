@@ -9,8 +9,6 @@ GeomMoon <- ggplot2::ggproto(
     stroke = 0.25, linetype = 1
   ),
   
-  # TODO: Make a proper legend key
-  # draw_key = ggplot2::draw_key_point,
   draw_key = draw_key_moon,
   
   draw_panel = function(data, panel_params, coord) {
@@ -49,6 +47,8 @@ GeomMoon <- ggplot2::ggproto(
 #' to \code{1 - ratio} on the first.
 #' 
 #' @inheritParams ggplot2::geom_point
+#' @export
+#' TODO: Add examples
 geom_moon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, ...
@@ -61,6 +61,12 @@ geom_moon <- function(
 }
 
 
+#' Moon key glyph for legends
+#'
+#' Draws the legend key glyphs used in \code{geom_moon}.
+#' 
+#' @inheritParams ggplot2::draw_key
+#' @export
 draw_key_moon <- function(data, params, size) {
   d_size <- ifelse(is.null(data$size), 10, data$size)
   d_col <- ifelse(is.null(data$colour), "black", data$colour)

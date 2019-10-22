@@ -24,6 +24,7 @@
 #' @param ... Arguments passed on to \code{grid::polygonGrob}.
 #' @inheritParams grid::polygonGrob
 #' @return A grob object.
+#' @export
 #' @examples
 #' grid::grid.newpage()
 #' grid.moon(x = 1:3 * 0.25, y = rep(0.5, 3), ratio = 1:3 * 0.25, r = 10)
@@ -84,6 +85,7 @@ moonGrob <- function(
 
 
 #' @rdname moonGrob
+#' @export
 grid.moon <- function(..., draw = TRUE) {
   mg <- moonGrob(...)
   if (draw) {
@@ -177,59 +179,3 @@ moon_coords <- function(
   
   list(x_coords = trans_x, y_coords = trans_y)
 }
-
-
-# Examples ----------------------------------------------------------------
-
-# grid.newpage()
-# grid.moon(
-#   20, 20, ratio = 0.25, size = 10, default.units = "mm",
-#   gp = gpar(fill = "firebrick2", col = "firebrick2")
-# )
-# grid.moon(
-#   20, 20, ratio = 0.75, size = 10, default.units = "mm", right = FALSE,
-#   gp = gpar(fill = "dodgerblue2", col = "dodgerblue2")
-# )
-# grid.moon(
-#   50, 50, ratio = 0.5, size = 10, default.units = "mm",
-#   gp = gpar(fill = "forestgreen")
-# )
-# grid.moon(
-#   50, 50, ratio = 0.5, size = 10, default.units = "mm", right = FALSE,
-#   gp = gpar(fill = "gold1")
-# )
-# grid.moon(
-#   80, 80, ratio = 0.9, size = 15, default.units = "mm"
-# )
-# grid.moon(
-#   80, 80, ratio = 0.1, size = 15, default.units = "mm", right = FALSE
-# )
-# grid.moon(
-#   110, 50, ratio = 0.6, size = 15, default.units = "mm",
-#   gp = gpar(fill = "chartreuse3", lwd = 0)
-# )
-# grid.moon(
-#   110, 50, ratio = 0.4, size = 15, default.units = "mm", right = FALSE,
-#   gp = gpar(fill = "blueviolet", lwd = 0)
-# )
-# grid.circle(
-#   80, 20, 10, default.units = "mm",
-#   gp = gpar(fill = "yellow", alpha = 0.5, lwd = 0)
-# )
-# grid.moon(
-#   80, 20, ratio = 1, size = 10, default.units = "mm",
-#   gp = gpar(fill = "cyan", alpha = 0.5, lwd = 0)
-# )
-# grid.moon(
-#   0.8, 0.5, ratio = 0.25, size = 10, default.units = "npc"
-# )
-
-# grid::grid.newpage()
-# grid.moon(
-#   x = rep(1:10/11, 10), y = rep(10:1/11, each = 10), ratio = 1:100/100,
-#   r = 3, gp = grid::gpar(
-#     col = hcl(0:99*3.6, c = 60, l = 70),
-#     fill = hcl(0:99*3.6, c = 60, l = 70)
-#   )
-# )
-
