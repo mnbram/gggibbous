@@ -27,7 +27,6 @@
 #' @examples
 #' grid::grid.newpage()
 #' grid.moon(x = 1:3 * 0.25, y = rep(0.5, 3), ratio = 1:3 * 0.25, r = 10)
-
 moonGrob <- function(
   x, y, ratio = 0.25, right = TRUE, r = 1, angle = 0,
   default.units = "npc", size.units = "mm", ...

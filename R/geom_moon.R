@@ -10,7 +10,8 @@ GeomMoon <- ggplot2::ggproto(
   ),
   
   # TODO: Make a proper legend key
-  draw_key = ggplot2::draw_key_point,
+  # draw_key = ggplot2::draw_key_point,
+  draw_key = draw_key_moon,
   
   draw_panel = function(data, panel_params, coord) {
     coords <- coord$transform(data, panel_params)
@@ -59,6 +60,23 @@ geom_moon <- function(
   )
 }
 
+
+draw_key_moon <- function(data, params, size) {
+  d_size <- ifelse(is.null(data$size), 10, data$size)
+  d_col <- ifelse(is.null(data$colour), "black", data$colour)
+  d_fill <- ifelse(is.null(data$fill), "white", data$fill)
+  d_stroke <- ifelse(is.null(data$stroke), 0.5, data$stroke)
+  d_ltype <- ifelse(is.null(data$linetype), "solid", data$linetype)
+  moonGrob(
+    0.5, 0.5, r = sqrt(d_size), ratio = 0.75,
+    gp = grid::gpar(
+      col = scales::alpha(d_col, data$alpha),
+      fill = scales::alpha(d_fill, data$alpha),
+      lwd = d_stroke * ggplot2::.stroke,
+      lty = d_ltype
+    )
+  )
+}
 
 
 # Examples ----------------------------------------------------------------
