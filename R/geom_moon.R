@@ -48,7 +48,7 @@ GeomMoon <- ggplot2::ggproto(
 #' 
 #' @inheritParams ggplot2::geom_point
 #' @export
-#' TODO: Add examples
+# TODO: Add examples
 geom_moon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, ...
