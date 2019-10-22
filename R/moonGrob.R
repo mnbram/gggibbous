@@ -96,6 +96,18 @@ grid.moon <- function(..., draw = TRUE) {
 moon_coords <- function(
   x, y, ratio, right, size, angle, default.units, size.units
 ) {
+  if (!grid::is.unit(x)) {
+    x <- grid::unit(x, default.units)
+  }
+  if (!grid::is.unit(y)) {
+    y <- grid::unit(y, default.units)
+  }
+  
+  # If the ratio is 0, then we don't want to draw a polygon at all
+  if (ratio == 0) {
+    return(list(x_coords = x, y_coords = y))
+  }
+  
   # The circles and ellipses in gggibbous are actually grid's xspline
   # approximation of a cubic B-spline approximation of a Bezier
   # approximation of an ellipse. As such, the "magic" number used here
@@ -158,17 +170,10 @@ moon_coords <- function(
   }
   
   # Translate the shape to the specified center point
-  if (!grid::is.unit(x)) {
-    x <- grid::unit(x, default.units)
-  }
-  if (!grid::is.unit(y)) {
-    y <- grid::unit(y, default.units)
-  }
   trans_x <- poly_x + x
   trans_y <- poly_y + y
   
   # TODO: Implement rotation
-  # FIXME: If ratio is 0 or 1, return a dummy point
   
   list(x_coords = trans_x, y_coords = trans_y)
 }
