@@ -26,7 +26,7 @@ hex_grid <- function(fontsize) {
   grid.moon(
     x = 0.5, y = 0.5, ratio = 1 - moon_pct,
     r = 75, default.units = "npc", size.units = "bigpts",
-    gp = gpar(fill = "gray10", color = "gray15", lwd = 1)
+    gp = gpar(fill = "gray15", color = "gray15", lwd = 1)
   )
   grid.text(
     x = unit(0.5, "npc") + unit(-52.5, "bigpts"), y = unit(0.5, "npc"),
@@ -48,6 +48,6 @@ dev.off()
 # Font sizes don't make sense
 # It seems that a difference in dpi rendering between graphical devices means
 # that we need the SVG font size to be 4/3 (96/72) times bigger than for PNG
-svglite("sticker/gggibbous.svg", width = 5, height = 5)
+svglite("sticker/gggibbous.svg", width = 3.62, height = 4.18)
 hex_grid(32 * 4 / 3)
 dev.off()
