@@ -48,6 +48,7 @@ dev.off()
 # Font sizes don't make sense
 # It seems that a difference in dpi rendering between graphical devices means
 # that we need the SVG font size to be 4/3 (96/72) times bigger than for PNG
-svglite("sticker/gggibbous.svg", width = 3.62, height = 4.18)
+svglite("sticker/gggibbous.svg", width = 181/72, height = 209/72,
+        bg = "transparent")
 hex_grid(32 * 4 / 3)
 dev.off()
