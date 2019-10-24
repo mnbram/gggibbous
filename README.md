@@ -1,2 +1,4 @@
 # gggibbous
-Moon charts for ggplot2
+Moon charts, a pie chart alternative, for ggplot2
+
+![gggibbous](/sticker/gggibbous.png)
