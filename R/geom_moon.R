@@ -48,7 +48,26 @@ GeomMoon <- ggplot2::ggproto(
 #' 
 #' @inheritParams ggplot2::geom_point
 #' @export
-# TODO: Add examples
+#' @examples
+#' # The default size range when mapping size to a variable is often too small
+#' # to see the moons clearly
+#' ggplot2::ggplot(
+#'   data.frame(x = 1:5, y = 1, size = 1:5, ratio = 1:5 * 0.2),
+#'   ggplot2::aes(x = x, y = y, size = size, ratio = ratio)
+#' ) +
+#'   geom_moon() +
+#'   ggplot2::scale_size_continuous(range = c(1, 20))
+#' 
+#' # To make full moon charts, you need to call geom_moon() twice, once with
+#' # right = TRUE and once with right = FALSE and ratio equal to 1 - ratio
+#' # from the first one  
+#' ggplot2::ggplot(
+#'   subset(dmeladh, N > 200),
+#'   ggplot2::aes(Longitude, Latitude)
+#' ) +
+#'   geom_moon(ggplot2::aes(ratio = AdhF / 100), fill = "black") +
+#'   geom_moon(ggplot2::aes(ratio = AdhS / 100), right = FALSE) +
+#'   ggplot2::coord_fixed()
 geom_moon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, ...
@@ -83,17 +102,3 @@ draw_key_moon <- function(data, params, size) {
     )
   )
 }
-
-
-# Examples ----------------------------------------------------------------
-
-# df <- data.frame(
-#   x = c(1:5), y = 1:5, gibbosity = 0:4 / 4, size = 1:5
-# )
-# 
-# ggplot2::ggplot(df, ggplot2::aes(x, y, size = size)) +
-#   geom_moon(ggplot2::aes(ratio = gibbosity), fill = "red", color = "red") +
-#   geom_moon(
-#     ggplot2::aes(ratio = 1 - gibbosity),
-#     fill = "blue", color = "blue", right = FALSE
-#   )
