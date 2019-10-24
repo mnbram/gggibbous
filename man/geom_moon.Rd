@@ -85,6 +85,20 @@ ggplot2::ggplot(
 # To make full moon charts, you need to call geom_moon() twice, once with
 # right = TRUE and once with right = FALSE and ratio equal to 1 - ratio
 # from the first one  
+ggplot2::ggplot(dmeladh) +
+  geom_moon(
+    x = 0.5, y = 0.5, fill = "forestgreen", color = "forestgreen",
+    ggplot2::aes(ratio = AdhF / 100)
+  ) +
+  geom_moon(
+    x = 0.5, y = 0.5, fill = "gold", color = "gold",
+    ggplot2::aes(ratio = AdhS / 100), right = FALSE
+  ) +
+  ggplot2::facet_wrap(~Locality, ncol = 7)
+
+# Moon charts (and pie charts) are sometimes useful on maps when x and y
+# cannot be used as aesthetic dimensions because they are already spatial
+# dimensions. Overplotting needs to be considered carefully, however.   
 ggplot2::ggplot(
   subset(dmeladh, N > 200),
   ggplot2::aes(Longitude, Latitude)

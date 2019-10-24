@@ -59,7 +59,7 @@ GeomMoon <- ggplot2::ggproto(
 #' like the lit and unlit portions of the moon. As such, they work best with
 #' only one or two groups.
 #' 
-#' \code{geom_moon} acts like \code{geom_points} in that mutiple moons can be
+#' \code{geom_moon} acts like \code{geom_point} in that mutiple moons can be
 #' plotted on the same panel with x and y in the plot's coordinate system, but
 #' size determined independently of the coordinate system. This behavior also
 #' means that the moons will always be circular even if the coordinate system is
@@ -85,6 +85,20 @@ GeomMoon <- ggplot2::ggproto(
 #' # To make full moon charts, you need to call geom_moon() twice, once with
 #' # right = TRUE and once with right = FALSE and ratio equal to 1 - ratio
 #' # from the first one  
+#' ggplot2::ggplot(dmeladh) +
+#'   geom_moon(
+#'     x = 0.5, y = 0.5, fill = "forestgreen", color = "forestgreen",
+#'     ggplot2::aes(ratio = AdhF / 100)
+#'   ) +
+#'   geom_moon(
+#'     x = 0.5, y = 0.5, fill = "gold", color = "gold",
+#'     ggplot2::aes(ratio = AdhS / 100), right = FALSE
+#'   ) +
+#'   ggplot2::facet_wrap(~Locality, ncol = 7)
+#'
+#' # Moon charts (and pie charts) are sometimes useful on maps when x and y
+#' # cannot be used as aesthetic dimensions because they are already spatial
+#' # dimensions. Overplotting needs to be considered carefully, however.   
 #' ggplot2::ggplot(
 #'   subset(dmeladh, N > 200),
 #'   ggplot2::aes(Longitude, Latitude)
