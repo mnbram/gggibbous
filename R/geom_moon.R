@@ -1,3 +1,27 @@
+#' Moon key glyph for legends
+#'
+#' Draws the legend key glyphs used in \code{geom_moon}.
+#' 
+#' @inheritParams ggplot2::draw_key
+#' @export
+draw_key_moon <- function(data, params, size) {
+  d_size <- ifelse(is.null(data$size), 10, data$size)
+  d_col <- ifelse(is.null(data$colour), "black", data$colour)
+  d_fill <- ifelse(is.null(data$fill), "white", data$fill)
+  d_stroke <- ifelse(is.null(data$stroke), 0.5, data$stroke)
+  d_ltype <- ifelse(is.null(data$linetype), "solid", data$linetype)
+  moonGrob(
+    0.5, 0.5, r = sqrt(d_size), ratio = 0.75,
+    gp = grid::gpar(
+      col = scales::alpha(d_col, data$alpha),
+      fill = scales::alpha(d_fill, data$alpha),
+      lwd = d_stroke * ggplot2::.stroke,
+      lty = d_ltype
+    )
+  )
+}
+
+
 GeomMoon <- ggplot2::ggproto(
   "GeomMoon", ggplot2::Geom,
   
@@ -76,29 +100,5 @@ geom_moon <- function(
     geom = GeomMoon, mapping = mapping, data = data, stat = stat, 
     position = position, show.legend = show.legend,
     inherit.aes = inherit.aes, params = list(na.rm = na.rm, ...)
-  )
-}
-
-
-#' Moon key glyph for legends
-#'
-#' Draws the legend key glyphs used in \code{geom_moon}.
-#' 
-#' @inheritParams ggplot2::draw_key
-#' @export
-draw_key_moon <- function(data, params, size) {
-  d_size <- ifelse(is.null(data$size), 10, data$size)
-  d_col <- ifelse(is.null(data$colour), "black", data$colour)
-  d_fill <- ifelse(is.null(data$fill), "white", data$fill)
-  d_stroke <- ifelse(is.null(data$stroke), 0.5, data$stroke)
-  d_ltype <- ifelse(is.null(data$linetype), "solid", data$linetype)
-  moonGrob(
-    0.5, 0.5, r = sqrt(d_size), ratio = 0.75,
-    gp = grid::gpar(
-      col = scales::alpha(d_col, data$alpha),
-      fill = scales::alpha(d_fill, data$alpha),
-      lwd = d_stroke * ggplot2::.stroke,
-      lty = d_ltype
-    )
   )
 }
