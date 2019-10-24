@@ -1,0 +1,19 @@
+#' \emph{Adh} allele frequencies in Australasian \emph{Drosophila melanogaster}
+#' 
+#' This data set contains allele frequencies for the "fast" and "slow" variants
+#' of the enzyme alcohol dehydrogenase in Australasian (mostly Australian)
+#' populations of \emph{Drosophila melanogaster}. The data are taken from
+#' Oakeshott, J.G., et al. 1982. Alcohol dehydrogenase and glycerol-3-phosphate
+#' dehydrogenase clines in \emph{Drosophila melanogaster} on different
+#' continents. Evolution, 36(1): 86-96.
+#' 
+#' @format A data frame with 34 rows and 6 variables:
+#' \describe{
+#'   \item{Locality}{location of population sample}
+#'   \item{Latitude}{latitude of population sample}
+#'   \item{Longitude}{longitude of population sample}
+#'   \item{N}{number of samples}
+#'   \item{AdhF}{percent of samples with \emph{Adh^F} allele, as an integer}
+#'   \item{AdhF}{percent of samples with \emph{Adh^S} allele, as an integer}
+#' }
+"dmeladh"
