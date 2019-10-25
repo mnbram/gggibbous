@@ -16,6 +16,8 @@ Depends:
 Imports:
     grid,
     scales (>= 1.0.0)
+Suggests: 
+    testthat (>= 2.1.0)
 License: GPL-3
 LazyData: true
 RoxygenNote: 6.1.1
