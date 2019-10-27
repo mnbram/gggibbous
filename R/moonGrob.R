@@ -96,7 +96,7 @@ grid.moon <- function(..., draw = TRUE) {
 
 
 moon_coords <- function(
-  x, y, ratio, right, size, angle, default.units, size.units
+  x, y, ratio, right, r, angle, default.units, size.units
 ) {
   if (!grid::is.unit(x)) {
     x <- grid::unit(x, default.units)
@@ -124,13 +124,13 @@ moon_coords <- function(
   # then we will translate everything to the right location (using
   # default.units).
   bez_circ_top <- grid::bezierPoints(grid::bezierGrob(
-    c(0, magic * size, size, size),
-    c(size, size, magic * size, 0),
+    c(0, magic * r, r, r),
+    c(r, r, magic * r, 0),
     default.units = size.units
   ))
   bez_circ_bot <- grid::bezierPoints(grid::bezierGrob(
-    c(size, size, magic * size, 0),
-    c(0, -magic * size, -size, -size),
+    c(r, r, magic * r, 0),
+    c(0, -magic * r, -r, -r),
     default.units = size.units
   ))
   
@@ -140,15 +140,15 @@ moon_coords <- function(
   x_dir <- ifelse(ratio > 0.5, 1, -1)
   
   bez_elli_bot <- grid::bezierPoints(grid::bezierGrob(
-    c(0, x_dir * magic * size * e_scale,
-      x_dir * size * e_scale, x_dir * size * e_scale),
-    c(-size, -size, -magic * size, 0),
+    c(0, x_dir * magic * r * e_scale,
+      x_dir * r * e_scale, x_dir * r * e_scale),
+    c(-r, -r, -magic * r, 0),
     default.units = size.units
   ))
   bez_elli_top <- grid::bezierPoints(grid::bezierGrob(
-    c(x_dir * size * e_scale, x_dir * size * e_scale,
-      x_dir * magic * size * e_scale, 0),
-    c(0, magic * size, size, size),
+    c(x_dir * r * e_scale, x_dir * r * e_scale,
+      x_dir * magic * r * e_scale, 0),
+    c(0, magic * r, r, r),
     default.units = size.units
   ))
   
