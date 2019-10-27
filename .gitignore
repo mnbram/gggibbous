@@ -38,3 +38,4 @@ rsconnect/
 gggibbous.Rcheck/
 gggibbous*.tar.gz
 gggibbous*.tgz
+inst/doc

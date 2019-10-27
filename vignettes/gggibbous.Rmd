@@ -1,0 +1,61 @@
+---
+title: "gggibbous: Moon charts, a pie chart alternative"
+author: "Mike Bramson"
+date: "October 27, 2019"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{gggibbous}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(gggibbous)
+```
+
+```{r, fig.width = 6, fig.height = 5.45}
+dmeladh_adj <- dmeladh
+dmeladh_adj$long <- dmeladh$Longitude + c(
+  -2, 0, -2, 2, -3, 3, 3, 2, 3, 4, -2.5, -2.5, -1, -2, -2.5, -4, 2.5,
+  5, 6, 7, 2, -7, -5.5, -3, 0, -7, -2, 3, 5.5, 0.5, -1, -1.5, -3, 2
+)
+dmeladh_adj$lat <- dmeladh$Latitude + c(
+  -2, 2, 0, 1, 0, 0, 0, 2, 0.5, -1, 1, -1.5, 2, 4, 1.5, 0, 2,
+  1, -1, -3, -2, 1, -1, -2, -3, -2, -4, -3, -1, 1.5, 2, 2, -2, 0
+)
+
+ggplot(dmeladh_adj, aes(long, lat)) +
+  geom_polygon(
+    data = map_data(
+      "world", region = "(Australia)|(Indonesia)|(Papua New Guinea)"),
+    aes(group = group),
+    fill = "gray80"
+  ) +
+  geom_segment(aes(xend = Longitude, yend = Latitude), color = "gray20") +
+  geom_point(aes(Longitude, Latitude), size = 0.75, color = "gray20") +
+  geom_moon(
+    aes(ratio = AdhS / 100, size = N),
+    right = FALSE, fill = "gold", color = "gold",
+    key_glyph = draw_key_moon_left
+  ) +
+  geom_moon(
+    aes(ratio = AdhF / 100, size = N),
+    fill = "forestgreen", color = "forestgreen"
+  ) +
+  scale_size(range = c(4, 10)) +
+  coord_map(xlim = c(110, 160), ylim = c(-45, -5)) +
+  theme_void() +
+  theme(
+    legend.position = c(0.05, 0.05),
+    legend.direction = "horizontal",
+    legend.justification = c(0, 0)
+  )
+```
+

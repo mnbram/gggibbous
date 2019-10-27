@@ -17,8 +17,11 @@ Imports:
     grid,
     scales (>= 1.0.0)
 Suggests: 
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    knitr,
+    rmarkdown
 License: GPL-3
 LazyData: true
 RoxygenNote: 6.1.1
 Encoding: UTF-8
+VignetteBuilder: knitr
