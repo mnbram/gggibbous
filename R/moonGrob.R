@@ -29,7 +29,7 @@
 #' grid::grid.newpage()
 #' grid.moon(x = 1:3 * 0.25, y = rep(0.5, 3), ratio = 1:3 * 0.25, r = 10)
 moonGrob <- function(
-  x, y, ratio = 0.25, right = TRUE, r = 1, angle = 0,
+  x, y, ratio = 0.25, right = TRUE, r = 10, angle = 0,
   default.units = "npc", size.units = "mm", ...
 ) {
   
@@ -66,7 +66,7 @@ moonGrob <- function(
   
   coords_list <- mapply(
     moon_coords,
-    x = x, y = y, ratio = ratio, right = right, size = r, angle = angle,
+    x = x, y = y, ratio = ratio, right = right, r = r, angle = angle,
     MoreArgs = list(
       default.units = default.units, size.units = size.units
     )

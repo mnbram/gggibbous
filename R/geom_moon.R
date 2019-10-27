@@ -5,13 +5,13 @@
 #' @inheritParams ggplot2::draw_key
 #' @export
 draw_key_moon <- function(data, params, size) {
-  d_size <- ifelse(is.null(data$size), 10, data$size)
+  d_size <- ifelse(is.null(data$size), 2.5, data$size)
   d_col <- ifelse(is.null(data$colour), "black", data$colour)
   d_fill <- ifelse(is.null(data$fill), "white", data$fill)
   d_stroke <- ifelse(is.null(data$stroke), 0.5, data$stroke)
   d_ltype <- ifelse(is.null(data$linetype), "solid", data$linetype)
   moonGrob(
-    0.5, 0.5, r = sqrt(d_size), ratio = 0.75,
+    0.5, 0.5, r = d_size, ratio = 0.75,
     gp = grid::gpar(
       col = scales::alpha(d_col, data$alpha),
       fill = scales::alpha(d_fill, data$alpha),
@@ -28,7 +28,7 @@ GeomMoon <- ggproto(
   required_aes = c("x", "y"),
   
   default_aes = aes(
-    ratio = 0.25, right = TRUE, size = 10, angle = 0,
+    ratio = 0.25, right = TRUE, size = 2.5, angle = 0,
     colour = "black", fill = "white", alpha = NA,
     stroke = 0.25, linetype = 1
   ),
@@ -39,7 +39,7 @@ GeomMoon <- ggproto(
     coords <- coord$transform(data, panel_params)
     moonGrob(
       coords$x, coords$y, ratio = coords$ratio, right = coords$right,
-      r = sqrt(coords$size), # Convert area to radius
+      r = coords$size,
       angle = coords$angle,
       gp = grid::gpar(
         col = scales::alpha(coords$colour, coords$alpha),
@@ -73,14 +73,11 @@ GeomMoon <- ggproto(
 #' @inheritParams ggplot2::geom_point
 #' @export
 #' @examples
-#' # The default size range when mapping size to a variable is often too small
-#' # to see the moons clearly
 #' ggplot(
 #'   data.frame(x = 1:5, y = 1, size = 1:5, ratio = 1:5 * 0.2),
 #'   aes(x = x, y = y, size = size, ratio = ratio)
 #' ) +
-#'   geom_moon() +
-#'   scale_size_continuous(range = c(1, 20))
+#'   geom_moon()
 #' 
 #' # To make full moon charts, you need to call geom_moon() twice, once with
 #' # right = TRUE and once with right = FALSE and ratio equal to 1 - ratio
