@@ -1,7 +1,11 @@
 #' Moon key glyph for legends
 #'
 #' Draws the legend key glyphs used in \code{geom_moon}.
-#' 
+#'
+#' \code{draw_key_moon} (the default in \code{geom_moon}) draws a gibbous moon
+#' filled from the right. \code{draw_key_moon_left} draws a crescent moon from
+#' the right.
+#'
 #' @inheritParams ggplot2::draw_key
 #' @export
 draw_key_moon <- function(data, params, size) {
@@ -18,6 +22,26 @@ draw_key_moon <- function(data, params, size) {
       lwd = d_stroke * .stroke,
       lty = d_ltype
     )
+  )
+}
+
+#' @rdname draw_key_moon
+#' @export
+draw_key_moon_left <- function(data, params, size) {
+  d_size <- ifelse(is.null(data$size), 10, data$size)
+  d_col <- ifelse(is.null(data$colour), "black", data$colour)
+  d_fill <- ifelse(is.null(data$fill), "white", data$fill)
+  d_stroke <- ifelse(is.null(data$stroke), 0.25, data$stroke)
+  d_ltype <- ifelse(is.null(data$linetype), "solid", data$linetype)
+  moonGrob(
+    0.5, 0.5, r = d_size / 2 * 0.75, ratio = 0.25,
+    gp = grid::gpar(
+      col = scales::alpha(d_col, data$alpha),
+      fill = scales::alpha(d_fill, data$alpha),
+      lwd = d_stroke * .stroke,
+      lty = d_ltype
+    ),
+    right = FALSE
   )
 }
 
