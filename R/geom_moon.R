@@ -15,19 +15,19 @@ draw_key_moon <- function(data, params, size) {
     gp = grid::gpar(
       col = scales::alpha(d_col, data$alpha),
       fill = scales::alpha(d_fill, data$alpha),
-      lwd = d_stroke * ggplot2::.stroke,
+      lwd = d_stroke * .stroke,
       lty = d_ltype
     )
   )
 }
 
 
-GeomMoon <- ggplot2::ggproto(
-  "GeomMoon", ggplot2::Geom,
+GeomMoon <- ggproto(
+  "GeomMoon", Geom,
   
   required_aes = c("x", "y"),
   
-  default_aes = ggplot2::aes(
+  default_aes = aes(
     ratio = 0.25, right = TRUE, size = 10, angle = 0,
     colour = "black", fill = "white", alpha = NA,
     stroke = 0.25, linetype = 1
@@ -44,7 +44,7 @@ GeomMoon <- ggplot2::ggproto(
       gp = grid::gpar(
         col = scales::alpha(coords$colour, coords$alpha),
         fill = scales::alpha(coords$fill, coords$alpha),
-        lwd = coords$stroke * ggplot2::.stroke,
+        lwd = coords$stroke * .stroke,
         lty = coords$linetype
       )
     )
@@ -75,42 +75,42 @@ GeomMoon <- ggplot2::ggproto(
 #' @examples
 #' # The default size range when mapping size to a variable is often too small
 #' # to see the moons clearly
-#' ggplot2::ggplot(
+#' ggplot(
 #'   data.frame(x = 1:5, y = 1, size = 1:5, ratio = 1:5 * 0.2),
-#'   ggplot2::aes(x = x, y = y, size = size, ratio = ratio)
+#'   aes(x = x, y = y, size = size, ratio = ratio)
 #' ) +
 #'   geom_moon() +
-#'   ggplot2::scale_size_continuous(range = c(1, 20))
+#'   scale_size_continuous(range = c(1, 20))
 #' 
 #' # To make full moon charts, you need to call geom_moon() twice, once with
 #' # right = TRUE and once with right = FALSE and ratio equal to 1 - ratio
 #' # from the first one  
-#' ggplot2::ggplot(dmeladh) +
+#' ggplot(dmeladh) +
 #'   geom_moon(
 #'     x = 0.5, y = 0.5, fill = "forestgreen", color = "forestgreen",
-#'     ggplot2::aes(ratio = AdhF / 100)
+#'     aes(ratio = AdhF / 100)
 #'   ) +
 #'   geom_moon(
 #'     x = 0.5, y = 0.5, fill = "gold", color = "gold",
-#'     ggplot2::aes(ratio = AdhS / 100), right = FALSE
+#'     aes(ratio = AdhS / 100), right = FALSE
 #'   ) +
-#'   ggplot2::facet_wrap(~Locality, ncol = 7)
+#'   facet_wrap(~Locality, ncol = 7)
 #'
 #' # Moon charts (and pie charts) are sometimes useful on maps when x and y
 #' # cannot be used as aesthetic dimensions because they are already spatial
 #' # dimensions. Overplotting needs to be considered carefully, however.   
-#' ggplot2::ggplot(
+#' ggplot(
 #'   subset(dmeladh, N > 200),
-#'   ggplot2::aes(Longitude, Latitude)
+#'   aes(Longitude, Latitude)
 #' ) +
-#'   geom_moon(ggplot2::aes(ratio = AdhF / 100), fill = "black") +
-#'   geom_moon(ggplot2::aes(ratio = AdhS / 100), right = FALSE) +
-#'   ggplot2::coord_fixed()
+#'   geom_moon(aes(ratio = AdhF / 100), fill = "black") +
+#'   geom_moon(aes(ratio = AdhS / 100), right = FALSE) +
+#'   coord_fixed()
 geom_moon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, ...
 ) {
-  ggplot2::layer(
+  layer(
     geom = GeomMoon, mapping = mapping, data = data, stat = stat, 
     position = position, show.legend = show.legend,
     inherit.aes = inherit.aes, params = list(na.rm = na.rm, ...)
