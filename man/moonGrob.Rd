@@ -5,7 +5,7 @@
 \alias{grid.moon}
 \title{Draw a moon}
 \usage{
-moonGrob(x, y, ratio = 0.25, right = TRUE, r = 1, angle = 0,
+moonGrob(x, y, ratio = 0.25, right = TRUE, r = 10, angle = 0,
   default.units = "npc", size.units = "mm", ...)
 
 grid.moon(..., draw = TRUE)

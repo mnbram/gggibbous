@@ -61,7 +61,7 @@ like the lit and unlit portions of the moon. As such, they work best with
 only one or two groups.
 }
 \details{
-\code{geom_moon} acts like \code{geom_points} in that mutiple moons can be
+\code{geom_moon} acts like \code{geom_point} in that mutiple moons can be
 plotted on the same panel with x and y in the plot's coordinate system, but
 size determined independently of the coordinate system. This behavior also
 means that the moons will always be circular even if the coordinate system is
@@ -73,37 +73,34 @@ and one with \code{right = FALSE}, with \code{ratio} on the second one equal
 to \code{1 - ratio} on the first.
 }
 \examples{
-# The default size range when mapping size to a variable is often too small
-# to see the moons clearly
-ggplot2::ggplot(
+ggplot(
   data.frame(x = 1:5, y = 1, size = 1:5, ratio = 1:5 * 0.2),
-  ggplot2::aes(x = x, y = y, size = size, ratio = ratio)
+  aes(x = x, y = y, size = size, ratio = ratio)
 ) +
-  geom_moon() +
-  ggplot2::scale_size_continuous(range = c(1, 20))
+  geom_moon()
 
 # To make full moon charts, you need to call geom_moon() twice, once with
 # right = TRUE and once with right = FALSE and ratio equal to 1 - ratio
 # from the first one  
-ggplot2::ggplot(dmeladh) +
+ggplot(dmeladh) +
   geom_moon(
     x = 0.5, y = 0.5, fill = "forestgreen", color = "forestgreen",
-    ggplot2::aes(ratio = AdhF / 100)
+    aes(ratio = AdhF / 100)
   ) +
   geom_moon(
     x = 0.5, y = 0.5, fill = "gold", color = "gold",
-    ggplot2::aes(ratio = AdhS / 100), right = FALSE
+    aes(ratio = AdhS / 100), right = FALSE
   ) +
-  ggplot2::facet_wrap(~Locality, ncol = 7)
+  facet_wrap(~Locality, ncol = 7)
 
 # Moon charts (and pie charts) are sometimes useful on maps when x and y
 # cannot be used as aesthetic dimensions because they are already spatial
 # dimensions. Overplotting needs to be considered carefully, however.   
-ggplot2::ggplot(
+ggplot(
   subset(dmeladh, N > 200),
-  ggplot2::aes(Longitude, Latitude)
+  aes(Longitude, Latitude)
 ) +
-  geom_moon(ggplot2::aes(ratio = AdhF / 100), fill = "black") +
-  geom_moon(ggplot2::aes(ratio = AdhS / 100), right = FALSE) +
-  ggplot2::coord_fixed()
+  geom_moon(aes(ratio = AdhF / 100), fill = "black") +
+  geom_moon(aes(ratio = AdhS / 100), right = FALSE) +
+  coord_fixed()
 }

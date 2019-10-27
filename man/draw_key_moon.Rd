@@ -2,9 +2,12 @@
 % Please edit documentation in R/geom_moon.R
 \name{draw_key_moon}
 \alias{draw_key_moon}
+\alias{draw_key_moon_left}
 \title{Moon key glyph for legends}
 \usage{
 draw_key_moon(data, params, size)
+
+draw_key_moon_left(data, params, size)
 }
 \arguments{
 \item{data}{A single row data frame containing the scaled aesthetics to
@@ -16,4 +19,9 @@ display in this key}
 }
 \description{
 Draws the legend key glyphs used in \code{geom_moon}.
+}
+\details{
+\code{draw_key_moon} (the default in \code{geom_moon}) draws a gibbous moon
+filled from the right. \code{draw_key_moon_left} draws a crescent moon from
+the right.
 }
