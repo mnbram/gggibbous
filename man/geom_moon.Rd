@@ -79,9 +79,9 @@ ggplot(
 ) +
   geom_moon()
 
-# To make full moon charts, you need to call geom_moon() twice, once with
-# right = TRUE and once with right = FALSE and ratio equal to 1 - ratio
-# from the first one  
+# To make full moon charts, you need two \\code{geom_moon}s, one with
+# right = TRUE and one with right = FALSE and ratio equal to 1 - ratio
+# from the first one 
 ggplot(dmeladh) +
   geom_moon(
     x = 0.5, y = 0.5, fill = "forestgreen", color = "forestgreen",
@@ -90,6 +90,23 @@ ggplot(dmeladh) +
   geom_moon(
     x = 0.5, y = 0.5, fill = "gold", color = "gold",
     aes(ratio = AdhS / 100), right = FALSE
+  ) +
+  facet_wrap(~Locality, ncol = 7)
+
+# The same thing can be accomplished with a single call to \\code{geom_moon()}
+# using a "long" data frame with both frequencies if you set a grouping
+# variable and set the \\code{right} variable to a boolean column
+adhf <- dmeladh[c("Locality", "AdhF")]
+adhs <- dmeladh[c("Locality", "AdhS")]
+names(adhf)[2] <- "freq"
+names(adhs)[2] <- "freq"
+dmeladh_long <- rbind(adhf, adhs)
+dmeladh_long$allele <- rep(c("AdhF", "AdhS"), each = nrow(dmeladh))
+dmeladh_long$right <- rep(c(TRUE, FALSE), each = nrow(dmeladh))
+ggplot(dmeladh_long) +
+  geom_moon(
+    x = 0.5, y = 0.5, key_glyph = draw_key_rect,
+    aes(ratio = freq / 100, fill = allele, color = allele, right = right),
   ) +
   facet_wrap(~Locality, ncol = 7)
 
