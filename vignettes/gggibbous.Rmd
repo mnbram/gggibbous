@@ -71,3 +71,18 @@ ggplot(dmeladh_adj, aes(long, lat)) +
     legend.justification = c(0, 0)
   )
 ```
+
+```{r}
+moonphase <- subset(lunardist, !is.na(phase))
+moonphase$percent <- ifelse(
+  moonphase$phase == "new", 0, ifelse(moonphase$phase == "full", 1, 0.5))
+
+ggplot(lunardist, aes(date, distance)) +
+  geom_line() +
+  geom_moon(data = moonphase, ratio = 1, size = 5, fill = "black") +
+  geom_moon(
+    data = moonphase, aes(ratio = percent),
+    size = 5, fill = "yellow", right = moonphase$phase == "first quarter"
+  )
+```
+

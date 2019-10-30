@@ -11,7 +11,7 @@
   \item{Longitude}{longitude of population sample}
   \item{N}{number of samples}
   \item{AdhF}{percent of samples with \emph{Adh^F} allele, as an integer}
-  \item{AdhF}{percent of samples with \emph{Adh^S} allele, as an integer}
+  \item{AdhS}{percent of samples with \emph{Adh^S} allele, as an integer}
 }}
 \usage{
 dmeladh
