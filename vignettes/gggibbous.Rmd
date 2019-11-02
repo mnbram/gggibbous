@@ -26,7 +26,7 @@ library(gggibbous)
 
 ```{r, fig.width = 5, fig.height = 1.25}
 ggplot(data.frame(x = 1:5, y = 0, ratio = 0:4 * 0.25), aes(x = x, y = y)) +
-  geom_moon(aes(ratio = ratio), size = 20, fill = "gray80") +
+  geom_moon(aes(ratio = ratio), size = 20, fill = "black") +
   geom_text(aes(y = y + 1, label = scales::percent(ratio, accuracy = 1))) +
   lims(x = c(0.5, 5.5), y = c(-1, 1.4)) +
   theme_void()
