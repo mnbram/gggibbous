@@ -3,11 +3,14 @@
 \name{draw_key_moon}
 \alias{draw_key_moon}
 \alias{draw_key_moon_left}
+\alias{draw_key_full_moon}
 \title{Moon key glyph for legends}
 \usage{
 draw_key_moon(data, params, size)
 
 draw_key_moon_left(data, params, size)
+
+draw_key_full_moon(data, params, size)
 }
 \arguments{
 \item{data}{A single row data frame containing the scaled aesthetics to
@@ -23,5 +26,7 @@ Draws the legend key glyphs used in \code{geom_moon}.
 \details{
 \code{draw_key_moon} (the default in \code{geom_moon}) draws a gibbous moon
 filled from the right. \code{draw_key_moon_left} draws a crescent moon from
-the right.
+the right. \code{draw_key_full_moon} draws a circle, which is very similar to
+\code{draw_key_point} in \code{ggplot2}, but the size is calculated slightly
+differently and the default aesthetics differ.
 }
