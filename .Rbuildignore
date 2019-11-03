@@ -3,3 +3,5 @@
 ^gggibbous\.Rcheck$
 ^gggibbous.*\.tar\.gz$
 ^gggibbous.*\.tgz$
+^doc$
+^Meta$
