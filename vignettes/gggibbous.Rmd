@@ -1,5 +1,5 @@
 ---
-title: "gggibbous: Moon charts, a pie chart alternative"
+title: "gggibbous: Moon charts, a pie chart alternative for two groups"
 author: "Mike Bramson"
 date: "October 27, 2019"
 output: rmarkdown::html_vignette
@@ -24,14 +24,35 @@ if (!all(sapply(required, requireNamespace, quietly = TRUE))) {
 library(gggibbous)
 ```
 
-```{r, fig.width = 5, fig.height = 1.25}
+```{r, echo = FALSE, fig.width = 3, fig.height = 1.5, out.extra = 'style="border: none; display: block; margin-left: auto; margin-right: auto"'}
+ggplot(
+  data.frame(
+    y = c(1, 3), group = c("a", "b"),
+    facet = factor(c(rep("pie", 2)), levels = c("pie", "moon"))
+  ),
+  aes(y = y, fill = group)
+) +
+  geom_col(aes(x = factor(0)), width = 2, color = "black") +
+  geom_moon(
+    data = data.frame(
+      x = factor(rep(-0.5, 2)), y = rep(0, 2), ratio = c(0.75, 0.25),
+      right = c(TRUE, FALSE), group = c("b", "a"), facet = c("moon", "moon")
+    ),
+    aes(x = x, y = y, ratio = ratio, right = right), size = 36, stroke = 0.5
+  ) +
+  coord_polar(theta = "y") +
+  facet_wrap(~facet) +
+  scale_fill_manual(values = c("white", "black"), guide = "none") +
+  theme_void(16)
+```
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 1.25, out.extra = 'style="border: none; display: block; margin-left: auto; margin-right: auto"'}
 ggplot(data.frame(x = 1:5, y = 0, ratio = 0:4 * 0.25), aes(x = x, y = y)) +
   geom_moon(aes(ratio = ratio), size = 20, fill = "black") +
   geom_text(aes(y = y + 1, label = scales::percent(ratio, accuracy = 1))) +
   lims(x = c(0.5, 5.5), y = c(-1, 1.4)) +
   theme_void()
 ```
-
 
 ```{r, fig.width = 6, fig.height = 5.45}
 dmeladh_adj <- dmeladh
@@ -83,7 +104,7 @@ tidyadh$right <- rep(c(TRUE, FALSE), each = nrow(dmeladh_adj))
 
 moonmap +
   geom_moon(
-    data = tidyadh, key_glyph = "point",
+    data = tidyadh, key_glyph = draw_key_full_moon,
     aes(ratio = percent / 100, fill = allele, color = allele, right = right,
         size = N)
   ) +
@@ -106,3 +127,8 @@ ggplot(lunardist, aes(date, distance)) +
   )
 ```
 
+TODO:
+
+* draw key section
+* intro to arguments
+* Harvey Ball example
