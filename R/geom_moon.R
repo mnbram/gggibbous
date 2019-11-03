@@ -105,15 +105,25 @@ GeomMoon <- ggproto(
 #' only one or two groups.
 #' 
 #' \code{geom_moon} acts like \code{geom_point} in that mutiple moons can be
-#' plotted on the same panel with x and y in the plot's coordinate system, but
-#' size determined independently of the coordinate system. This behavior also
-#' means that the moons will always be circular even if the coordinate system is
-#' not square.
+#' plotted on the same panel with \code{x} and \code{y} in the plot's coordinate
+#' system, but size determined independently of the coordinate system. This
+#' behavior also means that the moons will always be circular even if the
+#' coordinate system is not square.
 #' 
 #' In order to get a full circle with two complementary sections (a crescent and
 #' a gibbous moon), you need to plot two shapes: one with \code{right = TRUE}
 #' and one with \code{right = FALSE}, with \code{ratio} on the second one equal
 #' to \code{1 - ratio} on the first.
+#' 
+#' @section Aesthetics:
+#' \code{x} and \code{y} are required aesthetics.
+#' \code{size}, \code{fill},
+#' \code{colo(u)r}, \code{alpha}, \code{stroke}, and \code{group} aesthetics
+#' are understood as in other \code{geom}s.
+#' Two new aesthetics are also introduced: \code{ratio} and \code{right}.
+#' \code{ratio} controls the proportion of the moon to be plotted, from 0 to 1.
+#' \code{right} takes a boolean value to indicate whether the moon should be
+#' filled from the right or the left.
 #' 
 #' @inheritParams ggplot2::geom_point
 #' @export
