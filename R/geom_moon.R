@@ -21,7 +21,7 @@ draw_key_moon <- function(data, params, size) {
     gp = grid::gpar(
       col = scales::alpha(d_col, data$alpha),
       fill = scales::alpha(d_fill, data$alpha),
-      lwd = d_stroke * .stroke,
+      lwd = d_stroke * ggplot2::.stroke,
       lty = d_ltype
     )
   )
@@ -40,7 +40,7 @@ draw_key_moon_left <- function(data, params, size) {
     gp = grid::gpar(
       col = scales::alpha(d_col, data$alpha),
       fill = scales::alpha(d_fill, data$alpha),
-      lwd = d_stroke * .stroke,
+      lwd = d_stroke * ggplot2::.stroke,
       lty = d_ltype
     ),
     right = FALSE
@@ -60,19 +60,19 @@ draw_key_full_moon <- function(data, params, size) {
     gp = grid::gpar(
       col = scales::alpha(d_col, data$alpha),
       fill = scales::alpha(d_fill, data$alpha),
-      lwd = d_stroke * .stroke,
+      lwd = d_stroke * ggplot2::.stroke,
       lty = d_ltype
     )
   )
 }
 
 
-GeomMoon <- ggproto(
-  "GeomMoon", Geom,
+GeomMoon <- ggplot2::ggproto(
+  "GeomMoon", ggplot2::Geom,
   
   required_aes = c("x", "y"),
   
-  default_aes = aes(
+  default_aes = ggplot2::aes(
     ratio = 0.25, right = TRUE, size = 10, angle = 0,
     colour = "black", fill = "white", alpha = NA,
     stroke = 0.25, linetype = 1
@@ -89,7 +89,7 @@ GeomMoon <- ggproto(
       gp = grid::gpar(
         col = scales::alpha(coords$colour, coords$alpha),
         fill = scales::alpha(coords$fill, coords$alpha),
-        lwd = coords$stroke * .stroke,
+        lwd = coords$stroke * ggplot2::.stroke,
         lty = coords$linetype
       )
     )
@@ -179,7 +179,7 @@ geom_moon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, ...
 ) {
-  layer(
+  ggplot2::layer(
     geom = GeomMoon, mapping = mapping, data = data, stat = stat, 
     position = position, show.legend = show.legend,
     inherit.aes = inherit.aes, params = list(na.rm = na.rm, ...)
