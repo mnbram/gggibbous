@@ -229,12 +229,15 @@ them to a group, which requires that we rearrange the data into a “longer”
 (“tidy”) format.
 
 ```{r, fig.width = 6, fig.height = 5.45}
-adhf <- dmeladh_adj[c("long", "lat", "N", "AdhF")]
-adhs <- dmeladh_adj[c("long", "lat", "N", "AdhS")]
-names(adhf)[4] <- "percent"
-names(adhs)[4] <- "percent"
-tidyadh <- rbind(adhf, adhs)
-tidyadh$allele <- rep(c("AdhF", "AdhS"), each = nrow(dmeladh_adj))
+tidyadh <- reshape(
+  dmeladh_adj,
+  varying = c("AdhF", "AdhS"),
+  v.names = "percent",
+  timevar = "allele",
+  times = c("AdhF", "AdhS"),
+  idvar = c("Locality", "Latitude", "Longitude", "long", "lat", "N"),
+  direction = "long"
+)
 tidyadh$right <- rep(c(TRUE, FALSE), each = nrow(dmeladh_adj))
 
 moonmap +
@@ -271,6 +274,49 @@ ggplot(lunardist, aes(date, distance)) +
   )
 ```
 
-TODO:
+### Harvey balls
 
-* Harvey Ball example
+“Harvey balls” are essentially pie charts used for qualitative comparisons,
+often in tabular format.
+We can use moon charts for the same purpose.
+
+```{r}
+rest_names <- c(
+  "Anscombe's Luncheonette", "Chai Squared", "Tukey's Honest Southern Diner",
+  "Bagels ANOVA", "Spearmint Row"
+)
+restaurants <- data.frame(
+  Restaurant = factor(rest_names, levels = rest_names),
+  Food = c(5, 3, 4, 4, 1),
+  Decor = c(2, 5, 3, 1, 5),
+  Service = c(4, 2, 3, 3, 5),
+  Price = c(4, 5, 2, 5, 2)
+)
+restaurants
+```
+
+```{r, fig.width = 4.5, fig.height = 3}
+# First we reshape the data into "long" format to facilitate plotting
+rest_cats <- c("Food", "Decor", "Service", "Price")
+tidyrest <- reshape(
+  restaurants,
+  varying = rest_cats,
+  v.names = "Score",
+  timevar = "Category",
+  times = factor(rest_cats, levels = rest_cats),
+  idvar = "Restaurant",
+  direction = "long"
+)
+
+ggplot(tidyrest, aes(0, 0)) +
+  geom_moon(aes(ratio = (Score - 1) / 4), fill = "black") +
+  geom_moon(aes(ratio = 1 - (Score - 1) / 4), right = FALSE) +
+  facet_grid(Restaurant ~ Category, switch = "y") +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    strip.text.y = element_text(angle = 180, hjust = 1),
+    axis.text = element_blank(),
+    axis.title = element_blank()
+  )
+```
