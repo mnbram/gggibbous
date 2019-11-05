@@ -117,7 +117,7 @@ dmeladh_long <- reshape(
   idvar = c("Locality", "Latitude", "Longitude", "N"),
   direction = "long"
 )
-dmeladh_long$right <- rep(c(TRUE, FALSE), each = nrow(dmeladh_adj))
+dmeladh_long$right <- rep(c(TRUE, FALSE), each = nrow(dmeladh))
 ggplot(dmeladh_long) +
   geom_moon(
     x = 0.5, y = 0.5, key_glyph = draw_key_rect,
