@@ -12,8 +12,8 @@ Description: Moon charts are like pie charts except that the proportions are
     single panel and does not require a square coordinate system.
 Depends:
     R (>= 3.6.0),
-    ggplot2 (>= 3.2.1)
 Imports:
+    ggplot2 (>= 3.2.1),
     grid,
     scales (>= 1.0.0)
 Suggests: 
@@ -21,7 +21,8 @@ Suggests:
     mapproj,
     maps,
     rmarkdown,
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    vdiffr (>= 0.3.1)
 License: GPL-3
 LazyData: true
 RoxygenNote: 6.1.1
