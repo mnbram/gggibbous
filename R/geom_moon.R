@@ -134,7 +134,7 @@ GeomMoon <- ggplot2::ggproto(
 #' ) +
 #'   geom_moon()
 #' 
-#' # To make full moon charts, you need two \code{geom_moon}s, one with
+#' # To make full moon charts, you need two calls to geom_moon(), one with
 #' # right = TRUE and one with right = FALSE and ratio equal to 1 - ratio
 #' # from the first one 
 #' ggplot(dmeladh) +
@@ -148,16 +148,19 @@ GeomMoon <- ggplot2::ggproto(
 #'   ) +
 #'   facet_wrap(~Locality, ncol = 7)
 #'
-#' # The same thing can be accomplished with a single call to \code{geom_moon()}
+#' # The same thing can be accomplished with a single call to geom_moon()
 #' # using a "long" data frame with both frequencies if you set a grouping
-#' # variable and set the \code{right} variable to a boolean column
-#' adhf <- dmeladh[c("Locality", "AdhF")]
-#' adhs <- dmeladh[c("Locality", "AdhS")]
-#' names(adhf)[2] <- "freq"
-#' names(adhs)[2] <- "freq"
-#' dmeladh_long <- rbind(adhf, adhs)
-#' dmeladh_long$allele <- rep(c("AdhF", "AdhS"), each = nrow(dmeladh))
-#' dmeladh_long$right <- rep(c(TRUE, FALSE), each = nrow(dmeladh))
+#' # variable and set the `right` variable to a boolean column
+#' dmeladh_long <- reshape(
+#'   dmeladh,
+#'   varying = c("AdhF", "AdhS"),
+#'   v.names = "freq",
+#'   timevar = "allele",
+#'   times = c("AdhF", "AdhS"),
+#'   idvar = c("Locality", "Latitude", "Longitude", "N"),
+#'   direction = "long"
+#' )
+#' dmeladh_long$right <- rep(c(TRUE, FALSE), each = nrow(dmeladh_adj))
 #' ggplot(dmeladh_long) +
 #'   geom_moon(
 #'     x = 0.5, y = 0.5, key_glyph = draw_key_rect,
