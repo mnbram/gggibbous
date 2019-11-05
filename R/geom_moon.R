@@ -127,6 +127,7 @@ GeomMoon <- ggplot2::ggproto(
 #' 
 #' @inheritParams ggplot2::geom_point
 #' @export
+#' @import ggplot2
 #' @examples
 #' ggplot(
 #'   data.frame(x = 1:5, y = 1, size = 1:5, ratio = 1:5 * 0.2),
