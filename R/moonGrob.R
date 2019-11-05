@@ -43,8 +43,8 @@ moonGrob <- function(
   stopifnot(is.character(default.units))
   stopifnot(is.character(default.units))
   stopifnot(is.character(size.units))
-  stopifnot(default.units %in% grid:::.grid.unit.list)
-  stopifnot(size.units %in% grid:::.grid.unit.list)
+  stopifnot(default.units %in% .grid.unit.list)
+  stopifnot(size.units %in% .grid.unit.list)
   stopifnot(length(x) == length(y))
   stopifnot(length(ratio) %in% c(1, length(x)))
   stopifnot(length(right) %in% c(1, length(x)))
@@ -179,3 +179,12 @@ moon_coords <- function(
   
   list(x_coords = trans_x, y_coords = trans_y)
 }
+
+
+.grid.unit.list <- c(
+  "npc", "cm", "inches", "lines", "native", "null", "snpc", "mm", "points",
+  "picas", "bigpts", "dida", "cicero", "scaledpts", "strwidth", "strheight",
+  "strascent", "strdescent", "vplayoutwidth", "vplayoutheight", "char", "grobx",
+  "groby", "grobwidth", "grobheight", "grobascent", "grobdescent", "mylines",
+  "mychar", "mystrwidth", "mystrheight"
+)
