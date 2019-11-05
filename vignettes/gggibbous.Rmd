@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>")
 
-required <- c("maps", "mapproj")
+required <- c("maps", "mapproj", "knitr")
 if (!all(sapply(required, requireNamespace, quietly = TRUE))) {
   knitr::opts_chunk$set(eval = FALSE)
 }
@@ -280,6 +280,8 @@ ggplot(lunardist, aes(date, distance)) +
 often in tabular format.
 We can use moon charts for the same purpose.
 
+First, let's make up some data:
+
 ```{r}
 rest_names <- c(
   "Anscombe's Luncheonette", "Chai Squared", "Tukey's Honest Southern Diner",
@@ -292,8 +294,15 @@ restaurants <- data.frame(
   Service = c(4, 2, 3, 3, 5),
   Price = c(4, 5, 2, 5, 2)
 )
-restaurants
 ```
+
+As a regular table:
+
+```{r, echo = FALSE}
+knitr::kable(restaurants, align = "lcccc")
+```
+
+And now as a table with Harvey moons:
 
 ```{r, fig.width = 4.5, fig.height = 3}
 # First we reshape the data into "long" format to facilitate plotting
