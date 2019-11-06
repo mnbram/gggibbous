@@ -1,3 +1,8 @@
+gggibbous
+================
+Michael Bramson
+11/5/2019
+
 # gggibbous
 
 Moon charts, a pie chart alternative for two groups in ggplot2
