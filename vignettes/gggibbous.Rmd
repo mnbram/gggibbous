@@ -29,5 +29,5 @@ if (!all(sapply(required, requireNamespace, quietly = TRUE))) {
 }
 ```
 
-```{r, child = 'gggibbous-content.Rmd'}
+```{r, child = 'gggibbous-content.txt'}
 ```

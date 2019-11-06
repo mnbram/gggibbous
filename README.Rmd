@@ -29,5 +29,5 @@ Moon charts, a pie chart alternative for two groups in ggplot2
 devtools::install_github("mnbram/gggibbous")
 ```
 
-```{r, child = 'vignettes/gggibbous-content.Rmd'}
+```{r, child = 'vignettes/gggibbous-content.txt'}
 ```
