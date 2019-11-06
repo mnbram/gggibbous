@@ -4,8 +4,14 @@ author: "Michael Bramson"
 date: "11/5/2019"
 output:
   md_document:
-    variant: markdown_github
+    variant: gfm
 ---
+
+# gggibbous
+
+Moon charts, a pie chart alternative for two groups in ggplot2
+
+![gggibbous](images/moonmap.png)
 
 ## Installation
 
