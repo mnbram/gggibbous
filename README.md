@@ -13,7 +13,7 @@ This functionality is particularly useful on maps:
 
 ![moon_chart_map](/images/moonmap.png)
 
-`gggibbous is not yet on CRAN, so the easiest way to install it is with
+`gggibbous` is not yet on CRAN, so the easiest way to install it is with
 the `devtools` package:
 
 ```r
