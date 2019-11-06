@@ -11,7 +11,7 @@ output:
 
 Moon charts, a pie chart alternative for two groups in ggplot2
 
-![gggibbous](images/moonmap.png)
+![gggibbous](images/gggibbous.png)
 
 ## Installation
 
