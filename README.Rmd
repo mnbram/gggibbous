@@ -1,0 +1,19 @@
+---
+title: "gggibbous"
+author: "Michael Bramson"
+date: "11/5/2019"
+output:
+  md_document:
+    variant: markdown_github
+---
+
+## Installation
+
+`gggibbous` is not yet on CRAN, so the easiest way to install it is with the `devtools` package:
+
+```{r, eval = FALSE}
+devtools::install_github("mnbram/gggibbous")
+```
+
+```{r, child = 'vignettes/gggibbous.Rmd'}
+```
