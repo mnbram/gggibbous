@@ -2,7 +2,7 @@
 
 Moon charts, a pie chart alternative for two groups in ggplot2
 
-![gggibbous](images/moonmap.png)
+![gggibbous](images/gggibbous.png)
 
 ## Installation
 
@@ -31,7 +31,7 @@ the areas represent proportions of a whole, but in a moon chart the
 areas are drawn as crescent or gibbous portions of a circle—like the
 phases of the moon.
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 The motivation behind using a moon chart instead of a pie chart is
 primarily one of aesthetic choice. Note also that because the sections
@@ -61,7 +61,7 @@ ggplot(data.frame(x = 1:5, y = 1, size = 2^(0:4)), aes(x, y, size = size)) +
   scale_size(range = c(5, 10))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 Two new aesthetics are also important in `geom_moon`: `ratio` and
 `right`.
@@ -81,7 +81,7 @@ ggplot(data.frame(x = 1:5, y = 0, ratio = 0:4 * 0.25), aes(x = x, y = y)) +
   theme_void()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
 ### The `right` aesthetic
 
@@ -106,7 +106,7 @@ ggplot(tidymoons) +
   lims(x = c(0.5, 3.5), y = c(0.5, 3.5))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
 ## Legend key glyphs
 
@@ -131,7 +131,7 @@ ggplot(tidymoons, aes(x, y, ratio = ratio, right = right, size = 2^x)) +
   scale_size("size", range = c(5, 10), breaks = 2^(1:3))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
 **`draw_key_full_moon`** draws a circle. It is similar to the “point”
 key glyph, but the size is calculated slightly differently, so it is
@@ -150,7 +150,7 @@ ggplot(tidymoons) +
   theme(legend.box = "horizontal")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
 ## Worked examples
 
@@ -207,7 +207,7 @@ moonmap +
   )
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 If we want to label the alleles in the legend explicitly, then we need
 to map them to a group, which requires that we rearrange the data into a
@@ -235,7 +235,7 @@ moonmap +
   scale_color_manual(values = c("forestgreen", "gold"))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 ### Lunar data
 
@@ -261,7 +261,7 @@ ggplot(lunardist, aes(date, distance)) +
   )
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
 
 ### Harvey balls
 
@@ -323,7 +323,7 @@ ggplot(tidyrest, aes(0, 0)) +
   )
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
 
 1.  Oakeshott, J.G., et al. 1982. Alcohol dehydrogenase and
     glycerol-3-phosphate dehydrogenase clines in *Drosophila

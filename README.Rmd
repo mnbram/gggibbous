@@ -7,6 +7,15 @@ output:
     variant: gfm
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
 # gggibbous
 
 Moon charts, a pie chart alternative for two groups in ggplot2
