@@ -2,15 +2,16 @@
 title: "gggibbous"
 author: "Michael Bramson"
 date: "11/5/2019"
-output: github_document
+output:
+  md_document:
+    variant: gfm
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
-  fig.align = "center"
+  fig.path = "man/figures/README-"
 )
 ```
 
