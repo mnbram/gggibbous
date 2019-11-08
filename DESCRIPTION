@@ -1,5 +1,5 @@
 Package: gggibbous
-Title: Moon charts, a pie chart alternative
+Title: Moon Charts, a Pie Chart Alternative
 Version: 0.0.0.9001
 Authors@R: person("Michael", "Bramson", email = "mnbramson@gmail.com",
     role = c("aut", "cre"))
