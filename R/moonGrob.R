@@ -36,7 +36,12 @@ moonGrob <- function(
   stopifnot(is.numeric(x))
   stopifnot(is.numeric(y))
   stopifnot(is.numeric(ratio))
-  stopifnot(all(ratio >= 0), all(ratio <= 1))
+  if (any(ratio < 0) | any(ratio > 1)) {
+    stop("Error: ratios must be between 0 and 1")
+  }
+  if (!is.logical(right)) {
+    stop("Error: `right` must be a logical vector")
+  }
   stopifnot(is.logical(right))
   stopifnot(is.numeric(r))
   # stopifnot(is.numeric(angle))
