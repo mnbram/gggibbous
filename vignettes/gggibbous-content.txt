@@ -100,7 +100,8 @@ ggplot(tidymoons) +
 `gggibbous` includes three key glyphs for different types of legends:
 `draw_key_moon`, `draw_key_moon_left`, and `draw_key_full_moon`
 
-**`draw_key_moon`**—the default in `geom_moon`—draws a gibbous moon (see above).
+**`draw_key_moon`**—the default in `geom_moon`—draws a gibbous moon with
+`right = TRUE` (see above).
 
 **`draw_key_moon_left`** draws a crescent moon from the left that is
 complementary to the gibbous moon in `draw_key_moon`, which is useful for
