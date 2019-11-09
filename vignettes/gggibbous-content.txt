@@ -62,7 +62,7 @@ Two new aesthetics are also important in `geom_moon`: `ratio` and `right`.
 ### The `ratio` aesthetic
 
 `ratio` controls the proportion of the moon to be drawn.
-It should be between 0 (a “new moon” where nothing is actually drawn) and 1 (a
+It must be between 0 (a “new moon” where nothing is actually drawn) and 1 (a
 “full moon”, i.e. a circle).
 
 ```{r, fig.width = 5, fig.height = 1.25}
