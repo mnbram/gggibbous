@@ -104,7 +104,7 @@ GeomMoon <- ggplot2::ggproto(
 #' like the lit and unlit portions of the moon. As such, they work best with
 #' only one or two groups.
 #' 
-#' \code{geom_moon} acts like \code{geom_point} in that mutiple moons can be
+#' \code{geom_moon} acts like \code{geom_point} in that multiple moons can be
 #' plotted on the same panel with \code{x} and \code{y} in the plot's coordinate
 #' system, but size determined independently of the coordinate system. This
 #' behavior also means that the moons will always be circular even if the
