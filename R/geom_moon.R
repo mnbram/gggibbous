@@ -7,7 +7,9 @@
 #' the right. \code{draw_key_full_moon} draws a circle, which is very similar to
 #' \code{draw_key_point} in \code{ggplot2}, but the size is calculated slightly
 #' differently and the default aesthetics differ.
-#'
+#' 
+#' @return A grid grob.
+#' 
 #' @inheritParams ggplot2::draw_key
 #' @export
 draw_key_moon <- function(data, params, size) {
