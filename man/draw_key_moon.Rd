@@ -20,6 +20,9 @@ display in this key}
 
 \item{size}{Width and height of key in mm.}
 }
+\value{
+A grid grob.
+}
 \description{
 Draws the legend key glyphs used in \code{geom_moon}.
 }
