@@ -1,6 +1,6 @@
 Package: gggibbous
 Title: Moon Charts, a Pie Chart Alternative
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Michael", "Bramson", email = "mnbramson@gmail.com",
     role = c("aut", "cre"))
 URL: https://github.com/mnbram/gggibbous
