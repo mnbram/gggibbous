@@ -35,6 +35,17 @@ Note also that because the sections of a moon chart are swept from one or the
 other side of the circle, they are generally only appropriate for depicting one
 or two groups.
 
+Moon charts are similar to Kosara's (2019)^[
+Kosara, R. 2019. Circular Part-to-Whole Charts Using the Area Visual Cue.
+EuroVis 2019 - Short Papers. https://doi.org/10.2312/evs.20191163]
+“circular slice” chart.
+In studying subjects' perception of percentages in different chart types, the
+“circular slice” performed similarly to pie charts.
+Moon charts differ from the “circular slice” in that the latter slides a second
+disc of the same size over a base circle, more like a lunar eclipse than the
+sphases of the moon.
+Both depend on area as the perceptual cue, however.
+
 ## `gggibbous` and its usage
 
 `gggibbous` extends the `ggplot2` data visualization package to provide support
@@ -294,8 +305,10 @@ ggplot(tidyrest, aes(0, 0)) +
   theme_minimal() +
   theme(
     panel.grid = element_blank(),
-    strip.text.y = element_text(angle = 180, hjust = 1),
+    strip.text.y.left = element_text(angle = 0, hjust = 1),
     axis.text = element_blank(),
     axis.title = element_blank()
   )
 ```
+
+## References

@@ -1,7 +1,7 @@
 ---
 title: "gggibbous: Moon charts, a pie chart alternative for two groups"
 author: "Michael Bramson"
-date: "October 27, 2019"
+date: "December 23, 2020"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{gggibbous}
