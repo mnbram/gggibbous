@@ -6,8 +6,14 @@ Moon charts, a pie chart alternative for two groups in ggplot2
 
 ## Installation
 
-`gggibbous` is not yet on CRAN, so the easiest way to install it is with
-the `devtools` package:
+`gggibbous` can be installed from CRAN:
+
+``` r
+install.packages("gggibbous")
+```
+
+The development version can be installed from GitHub with the `devtools`
+package:
 
 ``` r
 devtools::install_github("mnbram/gggibbous")
@@ -22,12 +28,20 @@ the areas represent proportions of a whole, but in a moon chart the
 areas are drawn as crescent or gibbous portions of a circle—like the
 phases of the moon.
 
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
 
 The motivation behind using a moon chart instead of a pie chart is
 primarily one of aesthetic choice. Note also that because the sections
 of a moon chart are swept from one or the other side of the circle, they
 are generally only appropriate for depicting one or two groups.
+
+Moon charts are similar to Kosara’s (2019)\[1\] “circular slice” chart.
+In studying subjects’ perception of percentages in different chart
+types, the “circular slice” performed similarly to pie charts. Moon
+charts differ from the “circular slice” in that the latter slides a
+second disc of the same size over a base circle, more like a lunar
+eclipse than the sphases of the moon. Both depend on area as the
+perceptual cue, however.
 
 ## `gggibbous` and its usage
 
@@ -52,17 +66,16 @@ ggplot(data.frame(x = 1:5, y = 1, size = 2^(0:4)), aes(x, y, size = size)) +
   scale_size(range = c(5, 10))
 ```
 
-![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-6-1.png)<!-- -->
 
 Two new aesthetics are also important in `geom_moon`: `ratio` and
 `right`.
 
 ### The `ratio` aesthetic
 
-`ratio` controls the proportion of the moon to be drawn. It should be
+`ratio` controls the proportion of the moon to be drawn. It must be
 between 0 (a “new moon” where nothing is actually drawn) and 1 (a “full
-moon”, i.e. a
-circle).
+moon”, i.e. a circle).
 
 ``` r
 ggplot(data.frame(x = 1:5, y = 0, ratio = 0:4 * 0.25), aes(x = x, y = y)) +
@@ -72,7 +85,7 @@ ggplot(data.frame(x = 1:5, y = 0, ratio = 0:4 * 0.25), aes(x = x, y = y)) +
   theme_void()
 ```
 
-![](man/figures/README-unnamed-chunk-6-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
 
 ### The `right` aesthetic
 
@@ -97,15 +110,15 @@ ggplot(tidymoons) +
   lims(x = c(0.5, 3.5), y = c(0.5, 3.5))
 ```
 
-![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
 
 ## Legend key glyphs
 
 `gggibbous` includes three key glyphs for different types of legends:
 `draw_key_moon`, `draw_key_moon_left`, and `draw_key_full_moon`
 
-**`draw_key_moon`**—the default in `geom_moon`—draws a gibbous moon (see
-above).
+**`draw_key_moon`**—the default in `geom_moon`—draws a gibbous moon with
+`right = TRUE` (see above).
 
 **`draw_key_moon_left`** draws a crescent moon from the left that is
 complementary to the gibbous moon in `draw_key_moon`, which is useful
@@ -122,7 +135,7 @@ ggplot(tidymoons, aes(x, y, ratio = ratio, right = right, size = 2^x)) +
   scale_size("size", range = c(5, 10), breaks = 2^(1:3))
 ```
 
-![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
 
 **`draw_key_full_moon`** draws a circle. It is similar to the “point”
 key glyph, but the size is calculated slightly differently, so it is
@@ -141,7 +154,7 @@ ggplot(tidymoons) +
   theme(legend.box = "horizontal")
 ```
 
-![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
 
 ## Worked examples
 
@@ -154,7 +167,7 @@ bar charts are more difficult. This is a perfect opportunity to try out
 moon charts\!
 
 Pie chart maps are popular in population genetics, so let’s look at an
-example from that field. The `dmeladh` data\[1\] contains frequencies of
+example from that field. The `dmeladh` data\[2\] contains frequencies of
 two variants of the *Adh* gene in Australian and Papua New Guinean fruit
 fly populations. Many of these populations are close together, so we
 have to deal with overplotting, which we do manually below.
@@ -198,7 +211,7 @@ moonmap +
   )
 ```
 
-![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
 
 If we want to label the alleles in the legend explicitly, then we need
 to map them to a group, which requires that we rearrange the data into a
@@ -226,7 +239,7 @@ moonmap +
   scale_color_manual(values = c("forestgreen", "gold"))
 ```
 
-![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
 
 ### Lunar data
 
@@ -252,7 +265,7 @@ ggplot(lunardist, aes(date, distance)) +
   )
 ```
 
-![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
 
 ### Harvey balls
 
@@ -308,14 +321,20 @@ ggplot(tidyrest, aes(0, 0)) +
   theme_minimal() +
   theme(
     panel.grid = element_blank(),
-    strip.text.y = element_text(angle = 180, hjust = 1),
+    strip.text.y.left = element_text(angle = 0, hjust = 1),
     axis.text = element_blank(),
     axis.title = element_blank()
   )
 ```
 
-![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
 
-1.  Oakeshott, J.G., et al. 1982. Alcohol dehydrogenase and
+## References
+
+1.   Kosara, R. 2019. Circular Part-to-Whole Charts Using the Area
+    Visual Cue. EuroVis 2019 - Short Papers.
+    <https://doi.org/10.2312/evs.20191163>
+
+2.  Oakeshott, J.G., et al. 1982. Alcohol dehydrogenase and
     glycerol-3-phosphate dehydrogenase clines in *Drosophila
     melanogaster* on different continents. Evolution, 36(1): 86-96.
