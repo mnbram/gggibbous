@@ -41,3 +41,6 @@ gggibbous*.tgz
 inst/doc
 doc
 Meta
+
+# Phantom graphics file
+tests/testthat/Rplots.pdf

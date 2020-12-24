@@ -23,7 +23,13 @@ Moon charts, a pie chart alternative for two groups in ggplot2
 
 ## Installation
 
-`gggibbous` is not yet on CRAN, so the easiest way to install it is with the `devtools` package:
+`gggibbous` can be installed from CRAN:
+
+```{r, eval = FALSE}
+install.packages("gggibbous")
+```
+
+The development version can be installed from GitHub with the `devtools` package:
 
 ```{r, eval = FALSE}
 devtools::install_github("mnbram/gggibbous")
