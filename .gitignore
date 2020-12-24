@@ -44,3 +44,6 @@ Meta
 
 # Phantom graphics file
 tests/testthat/Rplots.pdf
+
+# Reverse dependency checks
+revdep

@@ -10,3 +10,4 @@
 ^LICENSE\.md$
 ^cran-comments\.md$
 ^tests/testthat/Rplots\.pdf$
+^revdep$
