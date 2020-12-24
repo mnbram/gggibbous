@@ -13,7 +13,7 @@ This is a resubmission. Notes on changes:
   functionality. As such, there is no reference to add to the DESCRIPTION.
 
 ## Test environments
-* Ubuntu 16.04.6 (R 3.6.0 and r-devel)
+* Fedora 33 (R 4.0.3 and r-devel)
 * win-builder (devel)
 
 ## R CMD check results
