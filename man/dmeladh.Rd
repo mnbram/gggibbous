@@ -4,7 +4,8 @@
 \name{dmeladh}
 \alias{dmeladh}
 \title{\emph{Adh} allele frequencies in Australasian \emph{Drosophila melanogaster}}
-\format{A data frame with 34 rows and 6 variables:
+\format{
+A data frame with 34 rows and 6 variables:
 \describe{
   \item{Locality}{location of population sample}
   \item{Latitude}{latitude of population sample}
@@ -12,7 +13,8 @@
   \item{N}{number of samples}
   \item{AdhF}{percent of samples with \emph{Adh^F} allele, as an integer}
   \item{AdhS}{percent of samples with \emph{Adh^S} allele, as an integer}
-}}
+}
+}
 \usage{
 dmeladh
 }

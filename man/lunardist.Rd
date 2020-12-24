@@ -4,13 +4,15 @@
 \name{lunardist}
 \alias{lunardist}
 \title{Lunar distances and principal phases for 2019}
-\format{A data frame with 365 rows and 3 variables:
+\format{
+A data frame with 365 rows and 3 variables:
 \describe{
   \item{date}{Date}
   \item{distance}{Distance from the Earth to the Moon in kilometers}
   \item{phase}{Principal phase of the moon (full, new, first quarter, third
   quarter) or NA if no principal phase on that date}
-}}
+}
+}
 \source{
 \url{https://svs.gsfc.nasa.gov/4442}
 }

@@ -3,7 +3,6 @@
 \docType{package}
 \name{gggibbous}
 \alias{gggibbous}
-\alias{gggibbous-package}
 \title{gggibbous: Moon charts, a pie chart alternative for two groups}
 \description{
 Moon charts are like pie charts except that the proportions are shown as
