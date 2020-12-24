@@ -15,4 +15,14 @@
 
 ## R CMD check results
 
+On Windows/R devel and Fedora/R 4.0.3:
+
 0 errors | 0 warnings | 0 notes
+
+On Fedora with r-devel, there is one note:
+
+* checking for future file timestamps ... NOTE  
+  unable to verify current time  
+  This appears to be an issue with the check itself accessing an external web
+  API. Disabling \_R_CHECK_SYSTEM_CLOCK_ removes the note.
+  
