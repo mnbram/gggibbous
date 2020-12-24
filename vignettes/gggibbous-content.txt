@@ -43,7 +43,7 @@ In studying subjects' perception of percentages in different chart types, the
 “circular slice” performed similarly to pie charts.
 Moon charts differ from the “circular slice” in that the latter slides a second
 disc of the same size over a base circle, more like a lunar eclipse than the
-sphases of the moon.
+phases of the moon.
 Both depend on area as the perceptual cue, however.
 
 ## `gggibbous` and its usage
